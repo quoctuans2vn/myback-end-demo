@@ -20,8 +20,9 @@
     <script src="./asset/js/main.js"></script>
 </head>
 <body class="bg-light">
-<?php 
-    require $controller->view;
-    ?>
+<?php
+    include $controller->view;
+?>
+
 </body>
 </html>
