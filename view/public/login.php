@@ -1,6 +1,6 @@
 <div class="container bg-light d-flex justify-content-center">
   <div class="loginBox col col-md-5 col-sm-6 bg-primary shadow p-3 mb-5 bg-white rounded ">
-    <form action="?a=login" method="Post">
+    <form action="Home/login" method="Post">
       <div class="pd-title">
         <h1 class="text-center">Login</h1>
       </div>

@@ -1,34 +1,64 @@
 $(document).ready(function (){
-    /*
-    $(".btn-menu").on('click',function(){
-        $html = 'view/' + $(this).attr('id') + '.php';
-        $("#data-returned").load($html);
+    
+    $(document).on('click','.action',function(){
+        var form_id = $(this).data('form_id');
+        var form_state = $(this).data('form_state');
+        if (!form_state){
+            var state = $(this).parent().prev();
+            var a = 'changeStatusForm';
+            var c = 'Admin';
+            if (confirm("Are you sure to change status of this form?")){
+                $.ajax({
+                    url: 'index.php',
+                    method: 'GET',
+                    data: {
+                        a:a,
+                        c:c,
+                        form_id:form_id,
+                        form_state:form_state
+                    },
+                    success: function(data){
+                        state.html(data);
+                    }
+                });
+            }
+        }
     });
-    $(document).on('submit','#main-form',function(event){
-        event.preventDefault();
-        var property = document.getElementById('file').files[0];
-        var file_name = property.name;
-        var file_extension = file_name.split('.').pop().toLowerCase();
-        var file_size = property.size;
-        var action = 'uploadForm';
-        var form = {
-            subject: $("#subject").val(),
-            contract: $("#contract").val(),
-            expire_time: $("#expire-time").val(),
-            file_name: file_name,
-            file_extension: file_extension,
-            file_size: file_size,
-        };
+    $(document).on('click','.delete',function(){
+        var user_id = $(this).data('user_id');
+        var delete_tar = $(this).parent().parent().parent();
+        if (confirm("Are you sure to delete this user?")){
+            var a = 'deleteUser';
+            var c = 'Admin';
+            $.ajax({
+                url: 'index.php',
+                method: 'GET',
+                data: {
+                    a:a,
+                    c:c,
+                    user_id:user_id
+                },
+                success: function(){
+                    delete_tar.remove();   
+                }
+            });
+
+        }
+    });
+    $(document).on('click','.show-roles',function(){
+        var a = 'getRoles';
+        var c = 'Admin';
         $.ajax({
             url: 'index.php',
-            type: 'POST',
-            dataType: 'JSON',
-            data: form,
-        }).done(function(result){
-            console.log(result);
+            method: 'GET',
+            data: {
+                a:a,
+                c:c,
+            },
+            success: function(data){
+                $('.roles_return').html(data);
+            }
         });
-
-    });    
-    */  
+    });
         
 });
